@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::open(['action'=>['DashboardController@update',$product->id],'method'=>'POST', 'class'=>'edit-form']) !!}
+{!! Form::open(['action'=>['ProductsController@update',$product->id],'method'=>'POST', 'class'=>'edit-form']) !!}
 {!! Form::hidden('_method', 'PUT') !!}
 <h3 style="color:#8a8a8a; text-align:center;padding:10px 0;">EDIT PRODUCT</h3>
 <div>{!! Form::label('product_name','Product Name') !!}{!! Form::text('product_name',$product->product_name) !!}</div>

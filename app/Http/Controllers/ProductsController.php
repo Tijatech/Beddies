@@ -8,35 +8,14 @@ use App\Product;
 use App\User;
 use App\Order;
 
-class DashboardController extends Controller
+class ProductsController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        if (auth()->user()->auth == 1) {
-            $products = Product::all();
-            $users = User::all();
-            $orders = Order::all();
-            return view('dashboard',['users'=>$users,'products'=>$products,'orders'=>$orders]);
-        }else{
-            return redirect('/');
-        }
-
-    }
+  
     public function create(){
         return view('create');
     }
@@ -70,10 +49,22 @@ class DashboardController extends Controller
     }
     public function edit(Product $product)
     {
-        dd($product);
-        //return view('edit',['product'=> $product]);
+        return view('edit',['product'=> $product]);
     }
-
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'product_name' => 'required',
+            'price' => 'required',
+            'category' => 'required'
+        ]);
+        $product = Product::find($id);
+        $product->product_name = $request->input('product_name');
+        $product->price = $request->input('price');
+        $product->category = $request->input('category');
+        $product->save();
+        return redirect('/dashboard');
+    }
 
     public function destroy(Product $product){
         $cart = Cart::where('product_id',$product->id);

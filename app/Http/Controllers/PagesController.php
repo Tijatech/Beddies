@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use App\Cart;
+
 
 class PagesController extends Controller
 {
@@ -12,8 +12,7 @@ class PagesController extends Controller
         $products = Product::all();
         return view('pages.index',['products'=>$products]);
     }
-    public function single_product($id){ 
-        $product = Product::find($id);
+    public function single_product(Product $product){
         return view('pages.single_product',['product'=>$product]);
     }
 

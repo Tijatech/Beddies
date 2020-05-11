@@ -54,7 +54,8 @@
                         @else
                         <h4 style="color:#8a8a8a; text-align:center;">No Other User Was Registered</h4>
                         @endif
-                        <h2 style="color:#8a8a8a; padding:0 10px;">Products Table <span  style="float:right; "><a class="create_btn" href="/dashboard/create">Create New Product</a></span></h2>
+                        <h2 style="color:#8a8a8a; padding:0 10px;">Products Table
+                            <span  style="float:right; "><a class="create_btn" href="/products/create">Create New Product</a></span></h2>
                         <table border="1">
                             <thead>
                                 <td>Product Name</td>
@@ -73,13 +74,13 @@
                                     <td>{{$product->category}}</td>
                                     <td>{{$product->created_at}}</td>
                                     <td>
-                                            {!! Form::open(['action'=>['DashboardController@edit',$product->id],'method'=>'GET']) !!}
+                                            {!! Form::open(['action'=>['ProductsController@edit',$product->id],'method'=>'POST']) !!}
                                             {!! Form::submit('Edit', ['class'=>'dash_btn regular']) !!}
                                             {!! Form::close() !!}
 
                                     </td>
                                     <td>
-                                            {!! Form::open(['action'=>['DashboardController@destroy',$product->id],'method'=>'POST']) !!}
+                                            {!! Form::open(['action'=>['ProductsController@destroy',$product->id],'method'=>'POST']) !!}
                                             {!! Form::hidden('_method','DELETE') !!}
                                             {!! Form::submit('Delete', ['class'=>'dash_btn danger']) !!}
                                             {!! Form::close() !!}
